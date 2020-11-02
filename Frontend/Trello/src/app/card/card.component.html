@@ -1,0 +1,7 @@
+<textarea style="overflow: hidden;" class="form-control text-background boardInput" type="text" placeholder="Enter card text..." (blur)="updateCard($event.target.value)" [(ngModel)]="card.text"></textarea>
+<div class="alert-warning text-background alertDiv">
+    {{getError("name")}}
+</div>
+<div class="alert-warning text-background alertDiv">
+  {{getError("general")}}
+</div>

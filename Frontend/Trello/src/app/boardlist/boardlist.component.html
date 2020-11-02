@@ -1,0 +1,22 @@
+<input class="form-control card-title boardInput" type="text" placeholder="Enter board list name..." (blur)="updateBoardList($event.target.value)" [(ngModel)]="boardList.name">
+<div class="alert-warning text-background alertDiv">
+    {{getError("name")}}
+</div>
+<div class="alert-warning text-background alertDiv">
+  {{getError("general")}}
+</div>
+
+<div>
+  <input class="form-control text-background" type="text" placeholder="Enter card text..." [(ngModel)]="newCard.text">
+  <div class="alert-warning text-background alertDiv">
+      {{getError("text")}}
+  </div>
+  <button class="btn btn-success" style="margin-top: .5rem; margin-bottom: .5rem;" (click)="addCard(newCard)">Add new card</button>
+</div>
+
+<div class="card cardDiv" *ngFor="let card of allCards">
+  <span class="deleteButton" (click)="deleteCard(card.id)">&times;</span>
+  <div class="card-body">
+    <app-card [card]="card"></app-card>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<app-navigation [homeLink]="'../../'" [signOutLink]="'../../../../login'"></app-navigation>
+
+<div class="main">
+  <h1>Board name: <span class="text-success">{{getBoardName()}}</span></h1>
+  
+  <div class="addDiv">
+    <h4>Add a new board list</h4>
+    <input type="text" placeholder="Enter board list name..." [(ngModel)]="newBoardList.name" class="form-control text-background">
+    <div class="alert-warning text-background alertDiv">
+        {{getError("name")}}
+    </div>
+    <button class="btn btn-success" style="margin-top: .5rem;" (click)="addBoardList(newBoardList)">Create new board list</button>
+  </div>
+  
+  <div class="boardListsDiv testimonial-group">
+    <div class="row fill">
+      <div class="card boardList" *ngFor="let boardList of allBoardLists">
+        <span class="deleteButton" (click)="deleteBoardList(boardList.id)">&times;</span>
+        <div class="card-body">
+          <app-boardlist [boardList]="boardList"></app-boardlist>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h5 style="margin-top: .5rem;" *ngIf="allBoardLists?.length == 0">There are no board lists. <span class="text-success">Add a new one!</span></h5>
+</div>

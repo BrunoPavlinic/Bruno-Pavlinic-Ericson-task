@@ -1,0 +1,34 @@
+<app-navigation [homeLink]="getHomeLink()" [signOutLink]="'../../login'"></app-navigation>
+
+<div class="main">
+  <h1>Welcome to Trello <span class="text-success">{{username}}</span></h1>
+
+  <div class="addDiv">
+    <h4>Add a new board or...</h4>
+    <input type="text" placeholder="Enter board name..." [(ngModel)]="newBoard.name" class="form-control text-background">
+    <div class="alert-warning text-background alertDiv">
+        {{getError("name")}}
+    </div>
+    <button class="btn btn-success" (click)="createBoard(newBoard)" style="margin-top: .5rem;">Create new board</button>
+  </div>
+
+  <div class="main">
+    <h4 style="margin-top: 5%;">... see a list of Your boards:</h4>
+    <div class="row fill">
+      <div class="card board" *ngFor="let board of allBoards">
+        <span class="deleteButton" (click)="deleteBoard(board.id)">&times;</span>
+        <div class="card-body">
+          <input class="form-control card-title boardInput" (blur)="updateBoard(board.id, $event.target.value)" type="text" placeholder="Enter board name..." [(ngModel)]="board.name">
+          <div [id]="board.id" class="alert-warning text-background alertDiv" style="display: none;">
+            Name is mandatory
+          </div>
+          <span style="margin-top: .5rem;" class="btn btn-success" (click)="viewBoard(board.id)">View board</span>
+        </div>
+      </div>
+    </div>
+    
+    <h5 *ngIf="allBoards?.length == 0">There are no boards. <span class="text-success">Add a new one!</span></h5>
+  </div>
+
+</div>
+
